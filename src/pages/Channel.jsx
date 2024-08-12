@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchFromAPI } from '../utils/api'
+import { fetchFromAPI } from '../utils/api';
 
 import Main from '../components/section/Main';
 import VideoSearch from '../components/videos/VideoSearch';
@@ -46,13 +46,18 @@ const Channel = () => {
 
     return (
         <Main 
-            title = "유튜브 채널"
+            title="유튜브 채널"
             description="유튜브 채널페이지입니다.">
             
             <section id='channel' className={channelPageClass}>
                 {channelDetail && (
                     <div className='channel__inner'>
-                        <div className='channel__header' style={{ backgroundImage: `url(${channelDetail.brandingSettings.image.bannerExternalUrl})` }}>
+                        <div 
+                            className='channel__header' 
+                            style={channelDetail.brandingSettings?.image?.bannerExternalUrl 
+                                ? { backgroundImage: `url(${channelDetail.brandingSettings.image.bannerExternalUrl})`, backgroundSize:'cover' } 
+                                : null}
+                        >
                             <div className='circle'>
                                 <img src={channelDetail.snippet.thumbnails.high.url} alt={channelDetail.snippet.title} />
                             </div>
@@ -76,7 +81,7 @@ const Channel = () => {
                 )}
             </section>
         </Main>
-    )
+    );
 }
 
-export default Channel
+export default Channel;
